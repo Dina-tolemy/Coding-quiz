@@ -11,6 +11,7 @@ var rightAnswer = document.getElementById("answer");
 var result = document.getElementById("resultContainer");
 var timer = document.getElementById("timer");
 var counter = document.getElementById("counter");
+var counter1 = document.getElementById("counter1");
 
 // the questions Array //
 var questionArray = [{
@@ -56,11 +57,15 @@ var questionArray = [{
 
 var lastQuestion = questionArray.length - 1;
 var currentQuestion = 0;
-var Timer;
 var count = 0;
 var questionTime = 10;
 var score = 0;
+var totalTime=50;
+var count2=0;
+var totalTimer;
 startQuizButton.addEventListener("click", startQuizFunc);
+
+
 
 //starting the quiz function 
 
@@ -71,6 +76,7 @@ function startQuizFunc() {
     displayCounter();
     displayResult();
     timer = setInterval(displayCounter, 1000);
+    totalTimer=setInterval(displayTotalTime,1000);
 
 
     quizQues.style.display = "block";
@@ -107,6 +113,7 @@ function displayCounter() {
     if (count <= questionTime) {
         counter.textContent = count;
         count++;
+        
     }
     else if (currentQuestion < lastQuestion) {
 
@@ -119,14 +126,28 @@ function displayCounter() {
     }
     else {
 
-        score = score;
-        count = 0;
+        clearInterval(timer);
         showScore();
 
     }
+    
 
 
 
+
+}
+
+// total
+
+
+function displayTotalTime()
+{
+    if(count2<totalTime){
+
+        totalTime--;
+        counter1.textContent=totalTime;
+        
+    }
 
 }
 
@@ -138,7 +159,6 @@ function ckeckAnsewr(answer) {
         score += 10;
         rightAnswer.textContent="correct answer";
         result.textContent = "your score is " + score;
-
         count = 0;
     }
     else {
@@ -169,14 +189,16 @@ function ckeckAnsewr(answer) {
 function showScore() {
 
     quizQues.style.display = "none";
-    var totalTime = count;
-    if (totalTime < 20) {
+    
+clearInterval(totalTimer);
+    if (totalTime > 30) {
 
         score += 20;
         result.textContent = "Well done you got extra points for finishing in less that 20 sec your final score is " + score;
 
+
     }
-    else if (totalTime < 30) {
+    else if (totalTime > 20) {
 
         score += 10;
         result.textContent = "Good job you got extra 10 points for finishing in less than 30 sec your final score is " + score;
