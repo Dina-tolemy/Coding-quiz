@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/style.css" />
+    <title>Coding-Quiz</title>
+</head>
+
+<body>
+
+    <div id="start">
+        <h3>Click the button to start your Quiz, know that each question have a 15 seconed to answer it.</h3>
+        <button id="startQuiz">Start quiz</button>
+    </div>
+    <div id="quiz" style="display: none;">
+        <ul>
+            <textarea id="question"></textarea>
+            <li class ="choices"id="A" onclick="ckeckAnsewr('A')"></li>
+            <li class ="choices"id="B" onclick="ckeckAnsewr('B')"></li>
+            <li class ="choices"id="C" onclick="ckeckAnsewr('C')"></li>
+            <li class ="choices"id="D" onclick="ckeckAnsewr('D')"></li>
+            <textarea id="answer"></textarea>
+            <div id="timer">
+                <div id="counter"></div>
+            </div>
+        </ul>
+
+    </div>
+
+    <div id="resultContainer" style="display: none;"></div>
+
+    <script src="./assets/javascript.js"></script>
+</body>
+
+</html>
