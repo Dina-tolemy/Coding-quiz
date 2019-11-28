@@ -11,30 +11,38 @@
 </head>
 
 <body>
+    
+    <div id="timer">
+            <div id="counter1"></div>
+            <div id="High-Score"></div>
 
-    <div id="start">
-        <h1>Simple Java script</h1>
-        <h3>Click the button to start your Quiz, know that each question have a 10 seconed to answer it.</h3>
-        <button id="startQuiz">Start quiz</button>
+        </div>
+    <div class="container">
+        <div id="start">
+            <h1>Simple Java script</h1>
+            <h3>Click the button to start your Quiz, know that each question have a 10 seconed to answer it.</h3>
+            <button id="startQuiz">Start quiz</button>
+        </div>
+        <div id="quiz" style="display: none;">
+            <ul>
+                <div id="question"></div>
+                <li class="choices" id="A" onclick="ckeckAnsewr('A')"></li>
+                <li class="choices" id="B" onclick="ckeckAnsewr('B')"></li>
+                <li class="choices" id="C" onclick="ckeckAnsewr('C')"></li>
+                <li class="choices" id="D" onclick="ckeckAnsewr('D')"></li>
+                <div id="answer"></div>
+               
+            </ul>
+
+        </div>
+
+        <div id="resultContainer" style="display: none;">
+            <div id="result"></div>
+            <input id="userName">
+            <button id="submit" onclick="submitFunction()"> Submit</button>
+
+        </div>
     </div>
-    <div id="quiz" style="display: none;">
-        <ul>
-            <textarea id="question"></textarea>
-            <li class ="choices"id="A" onclick="ckeckAnsewr('A')"></li>
-            <li class ="choices"id="B" onclick="ckeckAnsewr('B')"></li>
-            <li class ="choices"id="C" onclick="ckeckAnsewr('C')"></li>
-            <li class ="choices"id="D" onclick="ckeckAnsewr('D')"></li>
-            <textarea id="answer"></textarea>
-            <div id="timer">
-                <div id="counter"></div>
-                <div id="counter1"></div>
-
-            </div>
-        </ul>
-
-    </div>
-
-    <div id="resultContainer" style="display: none;"></div>
 
     <script src="./assets/javascript.js"></script>
 </body>

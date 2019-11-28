@@ -1,0 +1,84 @@
+body{
+
+    background-color:whitesmoke;
+}
+h1{
+
+    color:rgb(49, 47, 47);
+    text-align: center;
+    padding: 5px;
+    margin: 10px;
+    font-display: bolder;
+}
+h3{
+    color:rgb(49, 47, 47);
+    text-align: center;
+    padding: 5px;
+    margin: 10px;
+    font-display: bold;
+
+}
+
+#startQuiz{
+
+
+    background: indigo;
+    color:whitesmoke;
+    font-size: 40px;
+    text-align: center;
+    padding-block: 2px;
+    font-display: bold;
+    position: absolute;
+    left: 450px;
+    margin-top: 40px;
+    
+    
+    
+}
+#start{
+
+    align-content: center;
+    position: relative;
+    
+}
+
+#question,#timer,#answer{
+
+
+    font-size: 30px;
+    font-display: bold;
+    background-color: whitesmoke;
+    color: rgb(49, 47, 47);
+    padding: 10px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+#A,#B,#C,#D{
+
+    background-color: indigo;
+    font-size:x-large;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: ivory;
+    font-display: bold;
+    padding-block-end: 1px;
+    padding-left: 10px;}
+
+    #resultContainer{
+
+        padding-top: 10px;
+        font-size: x-large;
+        color: rgb(49, 47, 47);
+    }
+    #submit{
+
+        background: indigo;
+        color:whitesmoke;
+        font-size: 30px;
+        text-align: center;
+        padding-block: 2px;
+        font-display: bold;
+        left: 450px;
+        margin-top: 40px;
+
+    }
