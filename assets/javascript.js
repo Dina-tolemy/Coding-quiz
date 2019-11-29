@@ -15,6 +15,8 @@ var SubmitBtn = document.getElementById("submit");
 var counter1 = document.getElementById("counter1");
 var highScoreBar = document.getElementById("High-Score");
 var tryAgainBtn = document.getElementById("again");
+var wrongSound=document.getElementById("myAudio");
+var rightSound=document.getElementById("myAudio2");
 
 
 
@@ -137,11 +139,14 @@ function ckeckAnsewr(answer) {
 
     if (answer == questionArray[currentQuestion].rightAnswer) {
 
+        rightSound.play();
+
         rightAnswer.textContent = "correct answer";
 
     }
     else {
         totalTime = totalTime - 10;
+        wrongSound.play();
         rightAnswer.textContent = "Wrong answer!";
 
 
