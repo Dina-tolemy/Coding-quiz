@@ -96,10 +96,12 @@ h3 {
 
 #High-Score {
     margin-left: 0px;
+    font-display: bold;
 }
 
 #counter1 {
     margin-left: 1600px;
+    font-display: bold;
 }
 
 @media screen and (max-width: 1024px) {

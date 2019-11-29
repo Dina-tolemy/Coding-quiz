@@ -14,7 +14,7 @@ var timer = document.getElementById("timer");
 var SubmitBtn = document.getElementById("submit");
 var counter1 = document.getElementById("counter1");
 var highScoreBar = document.getElementById("High-Score");
-var tryAgainBtn=document.getElementById("again");
+var tryAgainBtn = document.getElementById("again");
 
 
 
@@ -60,16 +60,16 @@ var questionArray = [{
 ];
 
 
-var highscore =0;
-var userScore=0;
+var highscore = 0;
+var userScore = 0;
 var lastQuestion = questionArray.length - 1;
 var currentQuestion = 0;
 var totalTime = 75;
 var count2 = 0;
 var totalTimer;
 startQuizButton.addEventListener("click", startQuizFunc);
-SubmitBtn.addEventListener("click",submitFunction);
-tryAgainBtn.addEventListener("click",startQuizFunc);
+SubmitBtn.addEventListener("click", submitFunction);
+tryAgainBtn.addEventListener("click", startQuizFunc);
 
 
 
@@ -80,7 +80,7 @@ function startQuizFunc() {
     lastQuestion = questionArray.length - 1;
     currentQuestion = 0;
     totalTime = 75;
-     count2 = 0;
+    count2 = 0;
 
     startQuiz.style.display = "none";
     // resultTotal.style.display = "block";
@@ -106,7 +106,7 @@ function displayQuestion() {
     thirdAnswer.textContent = q.thirdAnswer;
     fourthAnswer.textContent = q.fourthAnswer;
 
-  
+
 }
 
 //display the result 
@@ -175,7 +175,7 @@ function showScore() {
     highscore = totalTime;
 
     result.textContent = "your final score is " + userScore;
-  
+
 
 }
 
@@ -190,7 +190,7 @@ function submitFunction() {
 
     }
 
-   localStorage.setItem("highscore", highscore);
+    localStorage.setItem("highscore", highscore);
     localStorage.setItem("userInfo", JSON.stringify(userInfo));
     var userInformation = JSON.parse(localStorage.getItem("userInfo"));
     var Scorebar = document.createElement("div");
@@ -202,9 +202,9 @@ function submitFunction() {
         localStorage.setItem("highscore", userInformation.score);
         highScoreBar.innerHTML = "Highest score is:  " + userInformation.score;
     }
-    else{
+    else {
 
-       highScoreBar.innerHTML = "Highest score is:  " + HighestScore;
+        highScoreBar.innerHTML = "Highest score is:  " + HighestScore;
 
     }
 
