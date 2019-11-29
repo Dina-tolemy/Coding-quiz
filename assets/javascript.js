@@ -14,7 +14,7 @@ var timer = document.getElementById("timer");
 var SubmitBtn = document.getElementById("submit");
 var counter1 = document.getElementById("counter1");
 var highScoreBar = document.getElementById("High-Score");
-
+var tryAgainBtn=document.getElementById("again");
 
 
 
@@ -60,27 +60,38 @@ var questionArray = [{
 ];
 
 
+var highscore =0;
+var userScore=0;
 var lastQuestion = questionArray.length - 1;
 var currentQuestion = 0;
-var score = 0;
-var totalTime = 70;
+var totalTime = 75;
 var count2 = 0;
 var totalTimer;
 startQuizButton.addEventListener("click", startQuizFunc);
+SubmitBtn.addEventListener("click",submitFunction);
+tryAgainBtn.addEventListener("click",startQuizFunc);
+
+
 
 //starting the quiz function 
 
 function startQuizFunc() {
 
+    lastQuestion = questionArray.length - 1;
+    currentQuestion = 0;
+    totalTime = 75;
+     count2 = 0;
 
     startQuiz.style.display = "none";
-    resultTotal.style.display="block";
+    // resultTotal.style.display = "block";
     displayQuestion();
     totalTimer = setInterval(displayTotalTime, 1000);
     quizQues.style.display = "block";
-    counter1.style.display="inline-block";
-    highScoreBar.style.display="inline-block";
-  
+    counter1.style.display = "inline-block";
+    highScoreBar.style.display = "inline-block";
+
+
+
 
 }
 // display the question function
@@ -94,7 +105,8 @@ function displayQuestion() {
     secondAnswer.textContent = q.secondAnswer;
     thirdAnswer.textContent = q.thirdAnswer;
     fourthAnswer.textContent = q.fourthAnswer;
-    
+
+  
 }
 
 //display the result 
@@ -110,6 +122,13 @@ function displayTotalTime() {
 
     }
 
+    else if (count2 == 0) {
+
+
+        clearInterval(totalTimer);
+        showScore();
+    }
+    return totalTime;
 }
 
 // ckecking the correct answer function 
@@ -117,9 +136,9 @@ function displayTotalTime() {
 function ckeckAnsewr(answer) {
 
     if (answer == questionArray[currentQuestion].rightAnswer) {
-        score += 10;
+
         rightAnswer.textContent = "correct answer";
-      
+
     }
     else {
         totalTime = totalTime - 10;
@@ -128,57 +147,70 @@ function ckeckAnsewr(answer) {
 
     }
 
-if (currentQuestion < lastQuestion) {
+    if (currentQuestion < lastQuestion) {
 
-    currentQuestion++;
-    displayQuestion();
+        currentQuestion++;
+        displayQuestion();
 
 
-}
-else {
+    }
+    else {
 
-    clearInterval(totalTime);
-    showScore();
-}
+
+        clearInterval(totalTimer);
+        counter1.textContent = totalTime;
+        showScore();
+    }
 
 }
 
 //showing final score
 function showScore() {
 
-    
+
     quizQues.style.display = "none";
-    resultTotal.style.display="block";
+    resultTotal.style.display = "block";
     clearInterval(totalTimer);
-    score = score + totalTime;
-    result.textContent="your final score is "+score;
+    userScore = totalTime;
+    highscore = totalTime;
+
+    result.textContent = "your final score is " + userScore;
   
-    return score;
-    
+
 }
 
-//checking the highest score
 
-function submitFunction(){
-   
+function submitFunction() {
 
-   var userInitial=document.getElementById("userName").value;
-  //  console.log(userInitial);
-   var  lastUserScore =score;
-  //  console.log(lastUserScore);
-  
-  localStorage.setItem('highscore', lastUserScore);
-  var scorefinal = localStorage.getItem('highscore');
+    var userInitial = document.getElementById("userName").value;
+    var userInfo = {
 
-  localStorage.setItem('initials', userInitial);
-  var nameFinal = localStorage.getItem('initials');
-  highScoreBar.innerHTML=scorefinal;
+        "name": userInitial,
+        "score": userScore,
 
-  
-var Scorebar=document.createElement("div");
-Scorebar.innerHTML= nameFinal+"------------"+scorefinal;
-resultTotal.appendChild(Scorebar); 
+    }
+
+   localStorage.setItem("highscore", highscore);
+    localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    var userInformation = JSON.parse(localStorage.getItem("userInfo"));
+    var Scorebar = document.createElement("div");
+    Scorebar.innerHTML = userInformation.name + "---------------" + userInformation.score;
+    resultTotal.appendChild(Scorebar);
+
+    var HighestScore = localStorage.getItem("highscore");
+    if (userInformation.score >= HighestScore) {
+        localStorage.setItem("highscore", userInformation.score);
+        highScoreBar.innerHTML = "Highest score is:  " + userInformation.score;
+    }
+    else{
+
+       highScoreBar.innerHTML = "Highest score is:  " + HighestScore;
+
+    }
+
+
 }
+
 
 
 
