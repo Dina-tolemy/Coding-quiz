@@ -43,6 +43,7 @@ function startQuizFunc() {
     quizQues.style.display = "block";
     counter1.style.display = "inline-block";
     highScoreBar.style.display = "inline-block";
+    rightAnswer.textContent = "";
 
 }
 // display the question function
@@ -103,22 +104,28 @@ function showScore() {
 
 
 function submitFunction() {
-
+    const lsHighScoreKey = "highscore";
+    const lsUserInfoKey = "userInfo";
     var userInitial = document.getElementById("userName").value;
     var userInfo = {
-        "score": userScore,
-        "name": userInitial,
+        score: userScore,
+        name: userInitial,
     };
     
-    var highscoreArray= localStorage.getItem("highscore") ? JSON.parse(localStorage.getItem("highscore")) : [];
+    var highscoreArray= localStorage.getItem(lsHighScoreKey) ? JSON.parse(localStorage.getItem(lsHighScoreKey)) : [];
+    localStorage.removeItem(lsHighScoreKey);
     highscoreArray.push(userScore);
-    localStorage.setItem("highscore",JSON.stringify(highscoreArray));
-    localStorage.setItem("userInfo", JSON.stringify(userInfo));
-    var userInformation = JSON.parse(localStorage.getItem("userInfo"));
+    localStorage.setItem(lsHighScoreKey,JSON.stringify(highscoreArray));
+    var userInfoArr = localStorage.getItem(lsUserInfoKey) ? JSON.parse(localStorage.getItem(lsUserInfoKey)) : [];
+    userInfoArr.push(userInfo);
+    localStorage.removeItem(lsUserInfoKey);
+    localStorage.setItem(lsUserInfoKey, JSON.stringify(userInfoArr));
    
-    var Scorebar = document.createElement("div");
-    Scorebar.innerHTML = userInformation.name + "---------------" + userInformation.score;
-    resultTotal.appendChild(Scorebar);
+    var scoreBoard = document.getElementById("scoreBoard");
+    scoreBoard.innerHTML = "";
+    for(var i=0; i < userInfoArr.length; i++){
+        scoreBoard.innerHTML += userInfoArr[i].name + "---------------" + userInfoArr[i].score +"<br />";
+    }
 
     function numberSort(a,b){
         return a - b;
