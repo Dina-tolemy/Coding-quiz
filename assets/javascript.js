@@ -1,4 +1,4 @@
-// reference questions.js
+
 // defining the variables//
 var startQuiz = document.getElementById("start");
 var startQuizButton = document.getElementById("startQuiz");
@@ -18,10 +18,6 @@ var highScoreBar = document.getElementById("High-Score");
 var tryAgainBtn = document.getElementById("again");
 var wrongSound = document.getElementById("myAudio");
 var rightSound = document.getElementById("myAudio2");
-
-
-
-// the questions Array //
 var userScore = 0;
 var lastQuestion = questionArray.length - 1;
 var currentQuestion = 0;
@@ -33,6 +29,7 @@ SubmitBtn.addEventListener("click", submitFunction);
 tryAgainBtn.addEventListener("click", startQuizFunc);
 
 function startQuizFunc() {
+    event.preventDefault();
     lastQuestion = questionArray.length - 1;
     currentQuestion = 0;
     totalTime = 75;
@@ -44,12 +41,9 @@ function startQuizFunc() {
     counter1.style.display = "inline-block";
     highScoreBar.style.display = "inline-block";
     rightAnswer.textContent = "";
-
 }
 // display the question function
-
 function displayQuestion() {
-
     resultTotal.style.display = "none";
     var q = questionArray[currentQuestion];
     theQuestion.textContent = q.theQuestion;
@@ -58,7 +52,6 @@ function displayQuestion() {
     thirdAnswer.textContent = q.thirdAnswer;
     fourthAnswer.textContent = q.fourthAnswer;
 }
-
 //display the result 
 function displayTotalTime() {
     if (count2 < totalTime) {
@@ -70,9 +63,7 @@ function displayTotalTime() {
     }
     return totalTime;
 }
-
 // ckecking the correct answer function 
-
 function ckeckAnsewr(answer) {
     if (answer == questionArray[currentQuestion].rightAnswer) {
         rightSound.play();
@@ -98,46 +89,50 @@ function showScore() {
     resultTotal.style.display = "block";
     clearInterval(totalTimer);
     userScore = totalTime;
-    // highscore = totalTime;
     result.textContent = "your final score is " + userScore;
 }
 
-
-function submitFunction() {
-    const lsHighScoreKey = "highscore";
+function savinguserInformation() {
     const lsUserInfoKey = "userInfo";
     var userInitial = document.getElementById("userName").value;
     var userInfo = {
         score: userScore,
         name: userInitial,
     };
-    
-    var highscoreArray= localStorage.getItem(lsHighScoreKey) ? JSON.parse(localStorage.getItem(lsHighScoreKey)) : [];
-    localStorage.removeItem(lsHighScoreKey);
-    highscoreArray.push(userScore);
-    localStorage.setItem(lsHighScoreKey,JSON.stringify(highscoreArray));
     var userInfoArr = localStorage.getItem(lsUserInfoKey) ? JSON.parse(localStorage.getItem(lsUserInfoKey)) : [];
     userInfoArr.push(userInfo);
     localStorage.removeItem(lsUserInfoKey);
     localStorage.setItem(lsUserInfoKey, JSON.stringify(userInfoArr));
-   
     var scoreBoard = document.getElementById("scoreBoard");
     scoreBoard.innerHTML = "";
-    for(var i=0; i < userInfoArr.length; i++){
-        scoreBoard.innerHTML += userInfoArr[i].name + "---------------" + userInfoArr[i].score +"<br />";
+    for (var i = 0; i < userInfoArr.length; i++) {
+        scoreBoard.innerHTML += userInfoArr[i].name + "---------------" + userInfoArr[i].score + "<br />";
     }
 
-    function numberSort(a,b){
+
+
+}
+
+function savingHighScores() {
+
+    const lsHighScoreKey = "highscore";
+    var highscoreArray = localStorage.getItem(lsHighScoreKey) ? JSON.parse(localStorage.getItem(lsHighScoreKey)) : [];
+    localStorage.removeItem(lsHighScoreKey);
+    highscoreArray.push(userScore);
+    localStorage.setItem(lsHighScoreKey, JSON.stringify(highscoreArray));
+    function numberSort(a, b) {
         return a - b;
     }
-
     highscoreArray.sort(numberSort);
-
     var maxScore = highscoreArray[highscoreArray.length - 1];
+    highScoreBar.innerHTML = "highest score is {" + maxScore + "}";
 
-    highScoreBar.innerHTML = "highest score is {"+  maxScore  +"}";
+}
 
+function submitFunction() {
 
+    savinguserInformation();
+    savingHighScores();
 }
 
 
